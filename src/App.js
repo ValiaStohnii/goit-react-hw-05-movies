@@ -1,17 +1,17 @@
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
-import AppBar from './components/AppBar/AppBar';
+import Layout from './components/Layout/Layout';
 import HomePage from './components/View/HomePage/HomePage';
+import MoviesPage from './components/View/MoviesPage/MoviesPage';
 
 function App() {
   return (
-    <div className="App">
-      <Routes>
-        <Route path="/" element={<AppBar />}>
-          <Route element={<HomePage />} />
-        </Route>
-      </Routes>
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route element={<MoviesPage />} />
+      </Route>
+    </Routes>
   );
 }
 
