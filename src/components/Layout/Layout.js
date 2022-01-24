@@ -1,16 +1,16 @@
-import { Link, Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import styles from './Navigation.module.css';
 
 export default function Layout() {
   return (
     <div>
       <nav>
-        <Link to="/" className={styles.link}>
+        <NavLink to="/" className={styles.link}>
           Home
-        </Link>
-        <Link to="movies" className={styles.link}>
+        </NavLink>
+        <NavLink to="/movies" className={styles.link}>
           Movies
-        </Link>
+        </NavLink>
       </nav>
       <Outlet />
     </div>
