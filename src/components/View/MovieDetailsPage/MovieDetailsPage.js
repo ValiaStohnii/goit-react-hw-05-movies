@@ -34,7 +34,7 @@ const MoviesDetailsPage = () => {
             <Link to="cast">Cast</Link>
           </li>
           <li>
-            <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
+            <Link to="reviews">Reviews</Link>
           </li>
         </ul>
       </div>
