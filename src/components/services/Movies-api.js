@@ -31,6 +31,6 @@ export function fetchCreditsMovies(movie_id) {
 }
 
 //запрос обзоров для страницы кинофильма
-export function fetchRewiewsMovies(movie_id) {
+export function fetchReviewsMovies(movie_id) {
   return fetchMovies(`${BASE_URL}/movie/${movie_id}/reviews?api_key=${KEY}&language=en-US&page=1`);
 }

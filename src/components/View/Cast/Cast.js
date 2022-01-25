@@ -10,7 +10,6 @@ const Cast = () => {
     moviesApi.fetchCreditsMovies(movieId).then(({ cast }) => setCast(cast));
   }, [movieId]);
 
-  console.log(cast);
   return (
     <div>
       {cast && (
