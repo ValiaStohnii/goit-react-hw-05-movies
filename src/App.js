@@ -1,27 +1,41 @@
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import Layout from './components/Layout/Layout';
-import HomePage from './components/View/HomePage/HomePage';
-import MoviesPage from './components/View/MoviesPage/MoviesPage';
-import MovieDetailsPage from './components/View/MovieDetailsPage/MovieDetailsPage';
 import NotFound from './components/View/NotFound';
-import Cast from './components/View/Cast/Cast';
-import Reviews from './components/View/Reviews/Reviews';
+import { lazy, Suspense } from 'react';
+
+const HomePage = lazy(() =>
+  import('./components/View/HomePage/HomePage' /*webpackChunkName: "home-page" */),
+);
+const MoviesPage = lazy(() =>
+  import('./components/View/MoviesPage/MoviesPage' /*webpackChunkName: "movie-page" */),
+);
+const MovieDetailsPage = lazy(() =>
+  import(
+    './components/View/MovieDetailsPage/MovieDetailsPage' /*webpackChunkName: "movie-details-page" */
+  ),
+);
+const Cast = lazy(() => import('./components/View/Cast/Cast' /*webpackChunkName: "cast-page" */));
+const Reviews = lazy(() =>
+  import('./components/View/Reviews/Reviews' /*webpackChunkName: "reviews-page" */),
+);
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<HomePage />} />
-        <Route path="movies" element={<MoviesPage />}>
-          <Route path=":movieId" element={<MovieDetailsPage />}>
-            <Route path="cast" element={<Cast />} />
-            <Route path="reviews" element={<Reviews />} />
+    <Suspense fallback={<h1>Loadig...</h1>}>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path="movies" element={<MoviesPage />}>
+            <Route path=":movieId" element={<MovieDetailsPage />}>
+              <Route path="cast" element={<Cast />} />
+              <Route path="reviews" element={<Reviews />} />
+            </Route>
           </Route>
         </Route>
-      </Route>
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Suspense>
   );
 }
 
