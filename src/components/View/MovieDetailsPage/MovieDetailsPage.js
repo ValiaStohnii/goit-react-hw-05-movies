@@ -1,17 +1,26 @@
-import { Outlet, Link, useParams } from 'react-router-dom';
+import { Outlet, Link, useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import * as moviesApi from '../../services/Movies-api';
 
 const MoviesDetailsPage = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     moviesApi.fetchDetailsMovies(movieId).then(setMovie);
   }, [movieId]);
 
+  const handleClick = () => {
+    navigate(location?.state?.from ?? '/');
+  };
+
   return (
     <div>
+      <button type="button" onClick={handleClick}>
+        Go back
+      </button>
       {movie && (
         <div>
           <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
