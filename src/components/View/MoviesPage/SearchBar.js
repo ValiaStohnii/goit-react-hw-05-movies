@@ -1,13 +1,12 @@
 import { useState } from 'react';
 
-const SearchBar = ({ onSubmit }) => {
-  const [searchMovies, setSearcMovies] = useState([]);
+export default function SearchBar({ onSubmit }) {
+  const [searchMovies, setSearcMovies] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
 
     if (searchMovies.trim() === '') {
-      alert('Введіть назву фільму');
       return;
     }
     onSubmit(searchMovies);
@@ -31,6 +30,4 @@ const SearchBar = ({ onSubmit }) => {
       </form>
     </div>
   );
-};
-
-export default SearchBar;
+}

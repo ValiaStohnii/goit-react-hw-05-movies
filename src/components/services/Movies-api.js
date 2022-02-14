@@ -14,9 +14,9 @@ export function fetchTrendingMovies() {
 }
 
 // поиск кинофильма по ключевому слову на странице фильмов
-export function fetchSearchMovies() {
+export function fetchSearchMovies(query) {
   return fetchMovies(
-    `${BASE_URL}search/movie?api_key=${KEY}&language=en-US&page=1&include_adult=false`,
+    `${BASE_URL}search/movie?query=${query}&api_key=${KEY}&language=en-US&page=1&include_adult=false`,
   );
 }
 

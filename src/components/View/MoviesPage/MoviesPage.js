@@ -3,12 +3,12 @@ import { useState, useEffect } from 'react';
 import * as moviesApi from '../../services/Movies-api';
 import SearchBar from './SearchBar';
 
-const MoviesPage = ({ searchMovies }) => {
+export default function MoviesPage({ searchMovies }) {
   const [films, setFilms] = useState('');
   const [searchFilm, setSearchFilm] = useState([]);
-  const [searchParams] = useSearchParams();
   const location = useLocation();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   const search = searchParams.get('query');
 
@@ -16,14 +16,20 @@ const MoviesPage = ({ searchMovies }) => {
     if (films === '') {
       return;
     }
-    moviesApi.fetchSearchMovies(films).then(({ results }) => setSearchFilm(results));
+    moviesApi
+      .fetchSearchMovies(films)
+      .then(r => r.results)
+      .then(setSearchFilm);
   }, [films]);
 
   useEffect(() => {
     if (search === null) {
       return;
     }
-    moviesApi.fetchSearchMovies(search).then(({ results }) => setSearchFilm(results));
+    moviesApi
+      .fetchSearchMovies(search)
+      .then(r => r.results)
+      .then(setSearchFilm);
   }, [search]);
 
   const formSubmit = searchMovies => {
@@ -54,6 +60,4 @@ const MoviesPage = ({ searchMovies }) => {
       <Outlet />
     </div>
   );
-};
-
-export default MoviesPage;
+}

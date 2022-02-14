@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import * as moviesApi from '../../services/Movies-api';
 
 export default function HomePage() {
   const [movies, setMovies] = useState([]);
+  const location = useLocation();
 
   useEffect(() => {
     moviesApi.fetchTrendingMovies().then(({ results }) => setMovies(results));
@@ -20,7 +21,9 @@ export default function HomePage() {
             }
             return (
               <li key={movie.id}>
-                <Link to={`/movies/${movie.id}`}>{movie.original_title}</Link>
+                <Link to={`/movies/${movie.id}`} state={{ from: location }}>
+                  {movie.original_title}
+                </Link>
               </li>
             );
           })}
